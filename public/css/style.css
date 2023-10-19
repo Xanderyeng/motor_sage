@@ -2216,7 +2216,11 @@ div#testimonials h4.m-title {
 
 @media(max-width: 1600px) {}
 
-@media(max-width: 1440px) {}
+@media(max-width: 1440px) {
+    /* .container {
+        max-width: 1400px;
+    } */
+}
 
 @media(max-width: 1366px) {
     .carousel-control-prev,

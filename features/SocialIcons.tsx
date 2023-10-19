@@ -10,12 +10,12 @@ export default function SocialIcons() {
 								<ul>
 									<li>
 										<a className="icon fb" href="#">
-                                        <FontAwesomeIcon icon="fa-facebook" />
+                                        {/* <FontAwesomeIcon icon="fa-facebook" /> */}
 										</a>
 									</li>
 									<li>
 										<a className="icon tw" href="#">
-                                        <FontAwesomeIcon icon="fa-twitter" />
+                                        {/* <FontAwesomeIcon icon="fa-twitter" /> */}
 										</a>
 										
 									</li>                           
