@@ -1,6 +1,54 @@
-import Image from 'next/image'
+"use client"
+import { useReducer, useState, useEffect } from "react";
+import { fetchCarMakeList, MakeListType } from "../app/api/carList";
+
+import CarBrands from '@/components/CarBrands'
+import CarDetail from '@/components/CarDetail'
+import BrandListingDropdown from "@/components/BrandListingDropdown";
+import Footer from "@/components/Footer";
+
+type CarAction = 
+| { type: 'carBrand'; payload: MakeListType };
+
+const initialState = {
+  brands: [] as unknown as MakeListType,
+}
+
+function carReducer( state: typeof initialState, action: CarAction) {
+  switch (action.type) {
+    case 'carBrand':
+      return { ...state, brands: action.payload};
+      default:
+        return state;
+  }
+}
+
 
 export default function Home() {
+  const [{ brands }, dispatch ] = useReducer(carReducer, initialState);
+  const [error, setError] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetchCarMakeList();
+        if (response) {
+          // setCarMakes(response);
+          dispatch({ type: 'carBrand', payload: response })
+        } else {
+          setError('Failed to fetch car makes');
+        }
+      } catch (error) {
+        console.error('Error fetching car makes:', error);
+        setError('Failed to fetch car makes');
+      }
+    }
+    fetchData();
+  }, []);
+
+  console.log(brands);
+
   return (
     <main>
       <div>
@@ -11,7 +59,7 @@ export default function Home() {
         <div className="col-md-3 logo_agile">
           <h1 className="text-center">
             <a href="index.html" className="font-weight-bold font-italic">
-              <img src="images/carsymbol5.png" alt=" " className="img-fluid" />Store
+              <img src="images/carsymbol5.png" alt=" " className="img-fluid" /> Motor Store
             </a>
           </h1>
         </div>
@@ -51,22 +99,8 @@ export default function Home() {
   <div className="navbar-inner">
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="agileits-navi_search">
-          <form action="#" method="post">
-            <select id="agileinfo-nav_search" name="agileinfo_search" className="border" required>
-              <option>All Categories</option>
-              <option value="Televisions">Televisions</option>
-              <option value="Headphones">Headphones</option>
-              <option value="Computers">Computers</option>
-              <option value="Appliances">Appliances</option>
-              <option value="Mobiles">Mobiles</option>
-              <option value="Fruits & Vegetables">Tv &amp; Video</option>
-              <option value="iPad & Tablets">iPad &amp; Tablets</option>
-              <option value="Cameras & Camcorders">Cameras &amp; Camcorders</option>
-              <option value="Home Audio & Theater">Home Audio &amp; Theater</option>
-            </select>
-          </form>
-        </div>
+        {/* DROPDOWN BRAND SELECTOR */}
+      <BrandListingDropdown brands={brands}/>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
@@ -77,7 +111,7 @@ export default function Home() {
                 <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+            {/* <li className="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Electronics
               </a>
@@ -242,7 +276,7 @@ export default function Home() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="contact.html">Contact Us</a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>
@@ -328,13 +362,17 @@ export default function Home() {
   </div>
   {/* //banner */}
   {/* top Products */}
+  <section className="container py-xl-4 py-lg-2 mt-sm-5 py-4 border-2 border-blue">
+              <CarBrands brands={brands} />
+    </section>
   <div className="ads-grid py-sm-5 py-4">
     <div className="container py-xl-4 py-lg-2">
       {/* tittle heading */}
-      <h3 className="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+      {/* <h3 className="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
         <span>O</span>ur
         <span>N</span>ew
-        <span>P</span>roducts</h3>
+        <span> C</span>ar
+        <span> B</span>rands</h3> */}
       {/* //tittle heading */}
       <div className="row">
         {/* product left */}
@@ -344,240 +382,17 @@ export default function Home() {
             <div className="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
               <h3 className="heading-tittle text-center font-italic">New Brand Mobiles</h3>
               <div className="row">
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m1.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">Samsung Galaxy J7</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$200.00</span>
-                        <del>$280.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="Samsung Galaxy J7" />
-                            <input type="hidden" name="amount" defaultValue={200.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m2.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                      <span className="product-new-top">New</span>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">OPPO A37f</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$230.00</span>
-                        <del>$250.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="OPPO A37f" />
-                            <input type="hidden" name="amount" defaultValue={230.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m3.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                      <span className="product-new-top">New</span>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">Apple iPhone X</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$280.00</span>
-                        <del>$300.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="Apple iPhone X" />
-                            <input type="hidden" name="amount" defaultValue={280.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* ----------- CAR LISTING ---------- */}
+             <CarDetail brands={brands} />
+             {/* <CarDetail />
+             <CarDetail /> */}
+
+
               </div>
             </div>
             {/* //first section */}
             {/* second section */}
-            <div className="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-              <h3 className="heading-tittle text-center font-italic">Tv &amp; Audio</h3>
-              <div className="row">
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m4.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">Sony 80 cm (32 inches)</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$320.00</span>
-                        <del>$340.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="Sony 80 cm (32 inches)" />
-                            <input type="hidden" name="amount" defaultValue={320.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m5.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                      <span className="product-new-top">New</span>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">Artis Speaker</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$349.00</span>
-                        <del>$399.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="Artis Speaker" />
-                            <input type="hidden" name="amount" defaultValue={349.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 product-men mt-5">
-                  <div className="men-pro-item simpleCart_shelfItem">
-                    <div className="men-thumb-item text-center">
-                      <img src="images/m6.jpg" alt="" />
-                      <div className="men-cart-pro">
-                        <div className="inner-men-cart-pro">
-                          <a href="single.html" className="link-product-add-cart">Quick View</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="item-info-product text-center border-top mt-4">
-                      <h4 className="pt-1">
-                        <a href="single.html">Philips Speakers</a>
-                      </h4>
-                      <div className="info-product-price my-2">
-                        <span className="item_price">$249.00</span>
-                        <del>$300.00</del>
-                      </div>
-                      <div className="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                        <form action="#" method="post">
-                          <fieldset>
-                            <input type="hidden" name="cmd" defaultValue="_cart" />
-                            <input type="hidden" name="add" defaultValue={1} />
-                            <input type="hidden" name="business" defaultValue=" " />
-                            <input type="hidden" name="item_name" defaultValue="Philips Speakers" />
-                            <input type="hidden" name="amount" defaultValue={249.00} />
-                            <input type="hidden" name="discount_amount" defaultValue={1.00} />
-                            <input type="hidden" name="currency_code" defaultValue="USD" />
-                            <input type="hidden" name="return" defaultValue=" " />
-                            <input type="hidden" name="cancel_return" defaultValue=" " />
-                            <input type="submit" name="submit" defaultValue="Add to cart" className="button btn" />
-                          </fieldset>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+         
             {/* //second section */}
             {/* third section */}
             <div className="product-sec1 product-sec2 px-sm-5 px-3">
@@ -750,145 +565,13 @@ export default function Home() {
             </div>
             {/* //price */}
             {/* discounts */}
-            <div className="left-side border-bottom py-2">
-              <h3 className="agileits-sear-head mb-3">Discount</h3>
-              <ul>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">5% or More</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">10% or More</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">20% or More</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">30% or More</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">50% or More</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">60% or More</span>
-                </li>
-              </ul>
-            </div>
+          
             {/* //discounts */}
             {/* reviews */}
-            <div className="customer-rev border-bottom left-side py-2">
-              <h3 className="agileits-sear-head mb-3">Customer Review</h3>
-              <ul>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <span>5.0</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <span>4.0</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star-half" />
-                    <span>3.5</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <span>3.0</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star-half" />
-                    <span>2.5</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+           
             {/* //reviews */}
             {/* electronics */}
-            <div className="left-side border-bottom py-2">
-              <h3 className="agileits-sear-head mb-3">Electronics</h3>
-              <ul>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Accessories</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Cameras &amp; Photography</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Car &amp; Vehicle Electronics</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Computers &amp; Accessories</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">GPS &amp; Accessories</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Headphones</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Home Audio</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Home Theater, TV &amp; Video</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Mobiles &amp; Accessories</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Portable Media Players</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Tablets</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Telephones &amp; Accessories</span>
-                </li>
-                <li>
-                  <input type="checkbox" className="checked" />
-                  <span className="span">Wearable Technology</span>
-                </li>
-              </ul>
-            </div>
+          
             {/* //electronics */}
             {/* delivery */}
             <div className="left-side border-bottom py-2">
@@ -996,6 +679,9 @@ export default function Home() {
   </div>
   {/* middle section */}
 </div>
+{/* ---- FOOTER SECTION --- */}
+        <Footer/>
+{/* ---- FOOTER SECTION END --- */}
 
       </main>
   )
