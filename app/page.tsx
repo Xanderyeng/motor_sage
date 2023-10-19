@@ -28,6 +28,9 @@ const initialState = {
   cars: [] as unknown as CarType,
   isLoading: false,
   error: "",
+  currentPage: 1,
+  pageSize: 10,
+  totalPages: 1,
 };
 
 function carReducer(state: typeof initialState, action: CarAction) {

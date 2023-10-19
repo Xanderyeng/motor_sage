@@ -1,45 +1,22 @@
-// Car Listing API Endpoint
-const apiUrl = "https://api.staging.myautochek.com/v1/inventory/car/search";
 
-export async function fetchListofCars() {
+const apiUrl = "https://api-prod.autochek.africa/v1/inventory/car/search";
 
-try {
-    const res = await fetch(`${apiUrl}`);
-    if (!res.ok) {
-        throw new Error(`Failed to Fetch all the Cars. Status: ${res.status}`);
+export async function fetchCarListingData(currentPage: number, pageSize: number) {
+  const url = `${apiUrl}?page_number=${currentPage}`;
+  // &page_size=${pageSize}
+
+  console.log(`current page: ${currentPage}`);
+  console.log(`Page Size: ${pageSize}`);
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch car listing data. Status: ${response.status}`);
     }
-    const carsList = await res.json();
-    return carsList;
-} catch (error) {
-    console.error("Error fetching car list:", error);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching car listing data:", error);
     return null;
+  }
 }
-// fetch(apiUrl)
-//   .then((response) => response.json())
-//   .then((data) => {
-//     setCars(data.result); // Assuming your cars are inside the 'result' property
-//     setLoading(false);
-//   })
-//   .catch((error) => {
-//     console.error("Error fetching car list:", error);
-//     setLoading(false);
-//   });
-}
-
-// useEffect(() => {
-//     async function fetchData() {
-//       try {
-//         const response = await fetchCarMakeList();
-//         if (response) {
-//           // setCarMakes(response);
-//           dispatch({ type: "carBrand", payload: response });
-//         } else {
-//           setError("Failed to fetch car makes");
-//         }
-//       } catch (error) {
-//         console.error("Error fetching car makes:", error);
-//         setError("Failed to fetch car makes");
-//       }
-//     }
-//     fetchData();
-//   }, []);
