@@ -122,8 +122,8 @@ export default function Home() {
                       {/* ----------- CAR LISTING ---------- */}
                       <CarListing
                         // cars={cars}
-                        // dispatch={dispatch}
-                        // isLoading={isLoading}
+                        dispatch={dispatch}
+                        isLoading={isLoading}
                         // error={error}
                       />
                       {/* <CarDetail brands={brands} /> */}

@@ -4,9 +4,9 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { fetchCarListingData } from "@/app/api/CarsFetchList";
 import Link from "next/link";
 
-export default function CarListing() {
+export default function CarListing({ isLoading, dispatch }) {
   const [cars, setCars] = useState<CarType[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(9); // Number of items per page
   const [totalPages, setTotalPages] = useState(1);
@@ -17,10 +17,12 @@ export default function CarListing() {
         const data = await fetchCarListingData(currentPage, pageSize);
         setCars(data.result);
         setTotalPages(Math.ceil(data.pagination.total / pageSize));
-        setLoading(false);
+        // setLoading(false);
+        dispatch({ type: "isLoading", payload: false });
       } catch (error) {
         console.error(error);
-        setLoading(false);
+        // setLoading(false);
+        dispatch({ type: "isLoading", payload: false });
       }
     }
 
