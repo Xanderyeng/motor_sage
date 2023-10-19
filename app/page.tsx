@@ -100,7 +100,7 @@ export default function Home() {
         {/* banner */}
         <BannerCarousel />
         {/* top Products */}
-        <section className='container  py-xl-4 py-lg-2 mt-sm-5 py-4 border-2 border-blue'>
+        <section className='container  py-xl-4 py-lg-2 mt-sm-5 py-4'>
           <CarBrands brands={brands} />
         </section>
         <div className='ads-grid py-sm-5 py-4'>
@@ -115,7 +115,7 @@ export default function Home() {
                     {/* <h3 className='heading-tittle text-center font-italic'>
                       New Brand Mobiles
                     </h3> */}
-                    <div className='row'>
+                    <div className='row justify-center'>
                       {/* ----------- CAR LISTING ---------- */}
                       <CarListing
                         // cars={cars}

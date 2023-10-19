@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CarType } from "@/types/Types";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function CarListing() {
   const [cars, setCars] = useState<CarType[]>([]);
@@ -51,47 +52,62 @@ export default function CarListing() {
 
   return (
     <>
-     <div className="car-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {cars.map((car) => (
-        <div key={car.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="relative">
-            <img src={car.imageUrl} alt={car.title} className="w-full h-64 object-cover" />
-            <div className="absolute top-2 right-2 p-2 bg-blue-600 text-white font-semibold rounded">
-              ${car.marketplacePrice}
+    {/* Display the total number of car results */}
+    <div className='text-left mb-4'>
+        <p>{totalPages}: Results</p>
+      </div>
+     <div className='car-list relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {cars.map((car) => (
+          <div
+            key={car.id}
+            className='bg-white rounded-lg shadow-lg overflow-hidden group relative'
+          >
+            <div className='relative'>
+              <img
+                src={car.imageUrl}
+                alt={car.title}
+                className='w-full h-64 object-cover'
+              />
+              <div className='absolute top-2 right-2 p-2 bg-blue-600 text-white font-semibold rounded'>
+                ${car.marketplacePrice}
+              </div>
+            </div>
+            <div className='p-4 group-hover:bg-gray-100'>
+              <h2 className='text-xl font-semibold mb-2'>{car.title}</h2>
+              <p className='text-gray-600'>
+                Year: {car.year} | City: {car.city} | State: {car.state}
+              </p>
+              <a
+                href={car.websiteUrl}
+                className="absolute bottom-0 left-0 right-0 p-4 bg-blue-600 text-white text-center transform -translate-y-full transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
+              >
+                View Details
+              </a>
             </div>
           </div>
-          <div className="p-4">
-            <h2 className="text-xl font-semibold mb-2">{car.title}</h2>
-            <p className="text-gray-600">
-              Year: {car.year} | City: {car.city} | State: {car.state}
-            </p>
-            <a
-              href={car.websiteUrl}
-              className="block text-blue-600 font-semibold hover:underline mt-4"
-            >
-              View Details
-            </a>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div className="pagination flex items-center justify-center">
-      {currentPage > 1 && (
-        <button onClick={handlePreviousPage} className="text-blue-500 font-semibold">
-          Previous
-        </button>
-      )}
-      <p className="mx-4">
-        Page {currentPage} of {totalPages}
-      </p>
-      {currentPage < totalPages && (
-        <button onClick={handleNextPage} className="text-blue-500 font-semibold">
-          Next
-        </button>
-      )}
-    </div>
-          
-
+        ))}
+      </div>
+      <div className='pagination flex items-center justify-center my-4'>
+        {currentPage > 1 && (
+          <button
+            onClick={handlePreviousPage}
+            className='text-blue-500 font-semibold mr-4'
+          >
+            <IoIosArrowBack size={24} />
+          </button>
+        )}
+        <p className='text-gray-600'>
+          Page <span className=" font-bold">{currentPage}</span> of {totalPages}
+        </p>
+        {currentPage < totalPages && (
+          <button
+            onClick={handleNextPage}
+            className='text-blue-500 font-semibold ml-4'
+          >
+            <IoIosArrowForward size={24} />
+          </button>
+        )}
+      </div>
     </>
   );
 }
