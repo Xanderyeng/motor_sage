@@ -1,6 +1,5 @@
 import BrandListingDropdown from "../BrandListingDropdown";
-import { MakeListType } from "@/app/api/carMakeListFetch";
-
+import { MakeListType } from "@/types/Types";
 interface CarBrandsProps {
   brands: MakeListType;
 }
