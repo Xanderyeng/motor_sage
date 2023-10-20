@@ -14,7 +14,7 @@ interface CarListingProps {
 export default function CarListing({ isLoading, dispatch }: CarListingProps) {
   const [cars, setCars] = useState<CarType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9); // Number of items per page
+  const [pageSize, setPageSize] = useState(6); // Number of items per page
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {

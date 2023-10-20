@@ -111,7 +111,7 @@ export default function Home() {
               <div className='agileinfo-ads-display col-lg-9'>
                 <div className='wrapper'>
                   {/* first section */}
-                  <div className=' px-sm-4 px-3 py-sm-5 py-0 mb-4'>
+                  <div className=' px-sm-4 px-3 py-sm-0 py-0 mb-4'>
                     <section className='w-auto gap-4 flex flex-col p-4 mx-auto mt-0 bg-white rounded-lg shadow-lg '>
                     <PopularCars />    
                     </section>

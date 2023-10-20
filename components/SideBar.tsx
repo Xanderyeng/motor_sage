@@ -14,7 +14,7 @@ export default function SideBar() {
                   {/* //arrivals */}
                   <NewArrivals />
                   {/* best seller */}
-                 <BestSeller />
+                 {/* <BestSeller /> */}
                   {/* //best seller */}
                 </div>
                 {/* //product right */}

@@ -6,8 +6,8 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const sampleCarUrl = `https://api-prod.autochek.africa/v1/inventory/car_media?carId=R1nVTV4Mj`;
-const carouselItemWidth = "486px";
-const carouselItemHeight = "336px";
+const carouselItemWidth = "100%";
+const carouselItemHeight = "380px";
 
 export default function PopularCars() {
     const [carImages, setCarImages] = useState<CarImagesState | null>(null);
@@ -15,7 +15,6 @@ export default function PopularCars() {
     useEffect(() => {
         async function fetchCarMedia() {
             const url = `${sampleCarUrl}`;
-            // console.log(url)
             try {
               const response = await fetch(url);
               if (!response.ok) {
@@ -34,12 +33,11 @@ export default function PopularCars() {
 
   return (
     <>
-    <div className='bg-white rounded-lg shadow-lg overflow-hidden group relative'>
     <Carousel showThumbs={true} showIndicators={true}>
           {carImages?.map((media) => (
             <div
               key={media.id}
-              className=' rounded-lg overflow-hidden w-[486px] h-[336px] '
+              className={`rounded-lg overflow-hidden w-full h-[380px] ${carouselItemHeight}`}
             >
               {media.type === "image/jpeg" ? (
                 <img
@@ -60,7 +58,6 @@ export default function PopularCars() {
             </div>
           ))}
         </Carousel>
-            </div>
     </>
   )
 }

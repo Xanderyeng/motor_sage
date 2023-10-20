@@ -32,7 +32,7 @@ export default function BannerCarousel() {
                       Sale
                     </h3>
                     <a className='button2' href='product.html'>
-                      Shop Now{" "}
+                      Buy Now{" "}
                     </a>
                   </div>
                 </div>
@@ -43,15 +43,15 @@ export default function BannerCarousel() {
                 <div className='w3l-space-banner'>
                   <div className='carousel-caption p-lg-5 p-sm-4 p-3'>
                     <p>
-                      advanced
-                      <span>Wireless</span> earbuds
+                      Best
+                      <span>Fuel</span> Efficiency
                     </p>
                     <h3 className='font-weight-bold pt-2 pb-lg-5 pb-4'>
-                      Best
-                      <span>Headphone</span>
+                      New Stock
+                      {/* <span>Headphone</span> */}
                     </h3>
                     <a className='button2' href='product.html'>
-                      Shop Now{" "}
+                      Call Today{" "}
                     </a>
                   </div>
                 </div>
@@ -66,8 +66,8 @@ export default function BannerCarousel() {
                       <span>10%</span> Cashback
                     </p>
                     <h3 className='font-weight-bold pt-2 pb-lg-5 pb-4'>
-                      New
-                      <span>Standard</span>
+                      Highly
+                      <span>Economical</span>
                     </h3>
                     <a className='button2' href='product.html'>
                       Shop Now{" "}
@@ -81,15 +81,15 @@ export default function BannerCarousel() {
                 <div className='w3l-space-banner'>
                   <div className='carousel-caption p-lg-5 p-sm-4 p-3'>
                     <p>
-                      Get Now
-                      <span>40%</span> Discount
+                      Buy
+                      <span>35%</span> Discount
                     </p>
                     <h3 className='font-weight-bold pt-2 pb-lg-5 pb-4'>
                       Today
                       <span>Discount</span>
                     </h3>
                     <a className='button2' href='product.html'>
-                      Shop Now{" "}
+                      Call Now{" "}
                     </a>
                   </div>
                 </div>
