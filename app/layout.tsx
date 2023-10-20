@@ -25,16 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>{children}
-      {/* <!-- smoothscroll --> */}
-	{/* <script src="js/SmoothScroll.min.js"></script> */}
-	{/* <!-- //smoothscroll --> */}
-
-	{/* <!-- start-smooth-scrolling --> */}
-	{/* <script src="js/move-top.js"></script> */}
-	{/* <script src="js/easing.js"></script> */}
-  <script src="js/jquery-2.2.3.min.js"></script>
+  <script src="js/jquery-2.2.3.min.js" async></script>
   {/* <!-- for bootstrap working --> */}
-	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.js" async></script>
       </body>
     </html>
   )
