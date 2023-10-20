@@ -36,6 +36,6 @@
     ".next/types/**/*.ts",
     "app/api/carMakeListFetch.tsx",
     "components/CarListing.tsx"
-, "features/CarSpecifications.jsx", "features/VehicleAdditionalInfo.jsx"  ],
+, "features/CarSpecifications.jsx", "features/VehicleAdditionalInfo.jsx", "features/BannerSlider.jsx"  ],
   "exclude": ["node_modules"]
 }

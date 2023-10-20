@@ -17,6 +17,7 @@ import SearchBar from "@/components/header/SearchBar";
 import CarListing from "@/components/CarListing";
 import { CarType } from "@/types/Types";
 import PopularCars from "@/components/PopularCars";
+import BannerSlider from "@/features/BannerSlider";
 
 export type CarAction =
   | { type: "carBrand"; payload: MakeListType }
@@ -100,6 +101,7 @@ export default function Home() {
         <NavBar brands={brands} />
         {/* banner */}
         <BannerCarousel />
+        {/* <BannerSlider /> */}
         {/* top Products */}
         <section className='container py-xl-4 py-lg-2 mt-sm-5 py-4'>
           <CarBrands brands={brands} />
