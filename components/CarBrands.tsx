@@ -13,7 +13,7 @@ export default function CarBrands({ brands }: CarBrandsProps) {
         <span>P</span>opular
         <span> B</span>rands
       </h3>
-      <div className='flex flex-row gap-6 justify-between'>
+      <div className='flex flex-row flex-wrap gap-6 justify-between'>
         {brands && brands.makeList?.length > 0 ? (
           brands.makeList.map(
             (brand: {
