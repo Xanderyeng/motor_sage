@@ -1,6 +1,5 @@
 import BrandListingDropdown from "../BrandListingDropdown";
-import { MakeListType } from "@types/Types";
-
+import { MakeListType } from "@/types/Types";
 interface CarBrandsProps {
   brands: MakeListType;
 }
