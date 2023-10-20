@@ -1,11 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation"
-import { CarDetailsType } from "@/types/Types";
 import { motion, AnimatePresence } from "framer-motion";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { CarDetailsType, CarImagesState } from "@/types/Types";
 import { formatValue } from "@/utils/formatValue";
 
 const apiUrl = `https://api-prod.autochek.africa/v1/inventory/car/`;
+// const apiUrlMedia = `https://api-prod.autochek.africa/v1/inventory/car_media?carId=`;
+const apiUrlMedia = `https://api-prod.autochek.africa/v1/inventory/car_media?carId=R1nVTV4Mj`;
 
 export async function fetchCarDetails({ params }: { params: { id: string } }) {
   const url = `${apiUrl}${params.id}`;
@@ -25,8 +28,29 @@ export async function fetchCarDetails({ params }: { params: { id: string } }) {
   }
 }
 
+async function fetchCarImages({ params }: { params: { id: string } }) {
+  const url = `${apiUrlMedia}`;
+  console.log(url)
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch car images. Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.carMediaList;
+  } catch (error) {
+    console.error("Error fetching car images:", error);
+    return null;
+  }
+}
+
+
+
 export default function CarDetails({ params }: { params: { id: string } }) {
   const [carDetails, setcarDetails] = useState<CarDetailsType | null>(null);
+  const [carImages, setCarImages] = useState<CarImagesState | null>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+
 
   useEffect(() => {
     async function fetchCarData() {
@@ -42,7 +66,21 @@ export default function CarDetails({ params }: { params: { id: string } }) {
     console.log(`Details of the car: ${params.id}`);
   }, [params]);
 
+  useEffect(() => {
+    async function fetchCarMedia() {
+      try {
+        const images = await fetchCarImages({ params });
+        setCarImages(images);
+        console.log(images)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchCarMedia();
+  }, [params]);
+
   console.log(carDetails?.model?.name);
+  // console.log(carImages)
 
   return (
     <>
@@ -51,17 +89,17 @@ export default function CarDetails({ params }: { params: { id: string } }) {
           <AnimatePresence>
             {carDetails && (
               <>
-                <div className=' w-9/12 flex flex-row justify-between border-2 border-orange-600 align-middle '>
+                <div className=' w-10/12 flex flex-row justify-between border-2 border-orange-600 align-middle '>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className='w-auto gap-4 flex flex-row p-8  mx-auto mt-8 bg-white rounded-lg shadow-lg border-2 border-green-500'
+                    className='w-auto gap-4 flex flex-col p-4 mx-auto mt-8 bg-white rounded-lg shadow-lg border-2 border-green-500'
                   >
                     <>
                       {/* CAR IMAGE */}
-                      <div className='relative max-w-md'>
+                      {/* <div className='relative max-w-md'>
                         <motion.img
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -70,12 +108,22 @@ export default function CarDetails({ params }: { params: { id: string } }) {
                           alt={carDetails.carName}
                           className='w-full h-96 object-cover rounded-lg'
                         />
+                      </div> */}
                         {/* <div className='absolute top-4 right-4'>
                           <span className='text-lg font-semibold'>
                             ${carDetails.marketplacePrice}
                           </span>
                         </div> */}
-                      </div>
+                      {/* -------- CAROUSEL ------- */}
+                    <div className='relative max-w-md'>
+                          <Carousel showThumbs={true}>
+                            {carImages?.map((carImages) => (
+                            <div key={carImages.id}>
+                            <img src={carImages.url} alt={carImages.name} />
+                          </div>
+                        ))}
+                      </Carousel>
+                    </div>
                     </>
                    
                   </motion.div>

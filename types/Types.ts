@@ -56,8 +56,13 @@ export interface CarDetailsType {
   };
 }
 
-  // export type CarAction =
-  // | { type: "carBrand"; payload: MakeListType }
-  // | { type: "carsList"; payload: CarType }
-  // | { type: 'loading'; payload: boolean }
-  // | { type: 'error'; payload: string };
+export interface CarImage {
+  id: number; 
+  name: string;
+  url: string;
+  createdAt: string; 
+  type: 'image' | 'video';
+  videoUrl?: string;
+}
+
+export type CarImagesState = CarImage[]
