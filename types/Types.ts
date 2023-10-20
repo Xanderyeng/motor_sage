@@ -56,13 +56,35 @@ export interface CarDetailsType {
   };
 }
 
+export type CarDetailsState = CarDetailsType[];
+
 export interface CarImage {
   id: number; 
   name: string;
   url: string;
   createdAt: string; 
-  type: 'image' | 'video';
+  type: "image/jpeg" | "video/mp4";
   videoUrl?: string;
 }
 
 export type CarImagesState = CarImage[]
+
+// <div className='relative max-w-md'>
+  // <Carousel showThumbs={true}>
+  //   {carImages?.map((media) => (
+  //     <div key={media.id}>
+  //       {media.type === "image/jpeg" ? (
+  //         <img src={media.url} alt={media.name} />
+  //       ) : (
+  //         <ReactPlayer
+  //           url={media.url}
+  //           controls
+  //           width="100%"
+  //           height="100%"
+  //         />
+  //       )}
+  //     </div>
+  //   ))}
+  // </Carousel>
+// </div>
+

@@ -1,6 +1,6 @@
 "use client";
 import React, { useReducer, useState, useEffect } from "react";
-import { fetchCarMakeList } from "./api/carMakeListFetch";
+import { fetchCarMakeList } from "@utils/carMakeListFetch";
 import { MakeListType } from "@/types/Types";
 // import { CarAction } from "@/types/Types";
 
@@ -16,6 +16,7 @@ import Logo from "@/components/header/Logo";
 import SearchBar from "@/components/header/SearchBar";
 import CarListing from "@/components/CarListing";
 import { CarType } from "@/types/Types";
+import PopularCars from "@/components/PopularCars";
 
 export type CarAction =
   | { type: "carBrand"; payload: MakeListType }
@@ -96,9 +97,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* shop locator (popup) */}
-        {/* //header-bottom */}
-        {/* navigation */}
         <NavBar brands={brands} />
         {/* banner */}
         <BannerCarousel />
@@ -108,16 +106,15 @@ export default function Home() {
         </section>
         <div className='ads-grid py-sm-5 py-4'>
           <div className='container md:mx-custom-1366 py-xl-4 py-lg-2'>
-            {/* //tittle heading */}
             <div className='row'>
               {/* product left */}
               <div className='agileinfo-ads-display col-lg-9'>
                 <div className='wrapper'>
                   {/* first section */}
                   <div className=' px-sm-4 px-3 py-sm-5 py-0 mb-4'>
-                    {/* <h3 className='heading-tittle text-center font-italic'>
-                      New Brand Mobiles
-                    </h3> */}
+                    <section className='w-auto gap-4 flex flex-col p-4 mx-auto mt-0 bg-white rounded-lg shadow-lg '>
+                    <PopularCars />    
+                    </section>
                     <div className='row justify-center'>
                       {/* ----------- CAR LISTING ---------- */}
                       <CarListing
@@ -142,7 +139,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* //top products */}
         {/* middle section */}
         <MiddleAdvertBanner />
       </div>

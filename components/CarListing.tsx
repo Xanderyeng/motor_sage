@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Dispatch } from "react";
 import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { fetchCarListingData } from "@/app/api/CarsFetchList";
+import { fetchCarListingData } from "@/utils/CarsFetchList";
 import { CarAction } from "@/app/page";
 import { CarType } from "@/types/Types";
 import { formatValue } from "@/utils/formatValue";
@@ -13,7 +13,6 @@ interface CarListingProps {
 
 export default function CarListing({ isLoading, dispatch }: CarListingProps) {
   const [cars, setCars] = useState<CarType[]>([]);
-  // const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(9); // Number of items per page
   const [totalPages, setTotalPages] = useState(1);
@@ -35,10 +34,6 @@ export default function CarListing({ isLoading, dispatch }: CarListingProps) {
 
     fetchData();
   }, [currentPage, pageSize]);
-
-  // const handlePageChange = (newPage: number) => {
-  //   setCurrentPage(newPage);
-  // };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
