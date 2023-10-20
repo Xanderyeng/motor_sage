@@ -21,7 +21,7 @@ const config: Config = {
           md: '768px',
           lg: '992px',
           xl: '1400px',
-          'custom-1366': '1200px',
+          'custom-1366': '1300px',
           // Wide Screens - 1920px and above
           '2xl': '1536px'
         },

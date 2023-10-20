@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { CarType } from "@/types/Types";
+import React, { useState, useEffect, Dispatch } from "react";
+import Link from "next/link";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { fetchCarListingData } from "@/app/api/CarsFetchList";
-import Link from "next/link";
+import { CarAction } from "@/app/page";
+import { CarType } from "@/types/Types";
+import { formatValue } from "@/utils/formatValue";
 
-export default function CarListing({ isLoading, dispatch }) {
+interface CarListingProps {
+  isLoading: boolean;
+  dispatch: Dispatch<CarAction>;
+}
+
+export default function CarListing({ isLoading, dispatch }: CarListingProps) {
   const [cars, setCars] = useState<CarType[]>([]);
   // const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,25 +25,16 @@ export default function CarListing({ isLoading, dispatch }) {
         setCars(data.result);
         setTotalPages(Math.ceil(data.pagination.total / pageSize));
         // setLoading(false);
-        dispatch({ type: "isLoading", payload: false });
+        dispatch({ type: "loading", payload: false });
       } catch (error) {
         console.error(error);
         // setLoading(false);
-        dispatch({ type: "isLoading", payload: false });
+        dispatch({ type: "loading", payload: false });
       }
     }
 
     fetchData();
   }, [currentPage, pageSize]);
-
-  // Function to format prices with punctuation
-  const formatPrice = (price: number | bigint) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "KES", 
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
 
   // const handlePageChange = (newPage: number) => {
   //   setCurrentPage(newPage);
@@ -54,7 +52,7 @@ export default function CarListing({ isLoading, dispatch }) {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <p>Loading cars...</p>;
   }
 
@@ -63,18 +61,14 @@ export default function CarListing({ isLoading, dispatch }) {
 
   return (
     <>
-    {/* Display the total number of car results */}
-    <div className='text-left mb-4'>
+      {/* Display the total number of car results */}
+      <div className='text-left mb-4'>
         <p>{totalPages}: Results</p>
       </div>
-     <div className='car-list relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+      <div className='car-list relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {cars.map((car) => (
-          <Link href={`/car/${car.id}`}
-            key={car.id}
-          >
-            <div
-              className='bg-white rounded-lg shadow-lg overflow-hidden group relative'
-            >
+          <Link href={`/car/${car.id}`} key={car.id}>
+            <div className='bg-white rounded-lg shadow-lg overflow-hidden group relative'>
               <div className='relative'>
                 <img
                   src={car.imageUrl}
@@ -82,7 +76,7 @@ export default function CarListing({ isLoading, dispatch }) {
                   className='w-full h-64 object-cover'
                 />
                 <div className='absolute top-2 right-2 p-2 bg-blue-600 text-white font-semibold rounded'>
-                {formatPrice(car.marketplacePrice)}
+                  {formatValue(car.marketplacePrice, "", "KES")}
                 </div>
               </div>
               <div className='p-4 group-hover:bg-gray-100'>
@@ -92,7 +86,7 @@ export default function CarListing({ isLoading, dispatch }) {
                 </p>
                 <a
                   href={car.websiteUrl}
-                  className="absolute bottom-0 left-0 right-0 p-4 bg-blue-600 text-white text-center transform -translate-y-full transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-y-0"
+                  className='absolute bottom-0 left-0 right-0 p-4 bg-blue-600 text-white text-center transform -translate-y-full transition-transform duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-y-0'
                 >
                   View Details
                 </a>
@@ -111,7 +105,7 @@ export default function CarListing({ isLoading, dispatch }) {
           </button>
         )}
         <p className='text-gray-600'>
-          Page <span className=" font-bold">{currentPage}</span> of {totalPages}
+          Page <span className=' font-bold'>{currentPage}</span> of {totalPages}
         </p>
         {currentPage < totalPages && (
           <button

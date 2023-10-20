@@ -103,7 +103,7 @@ export default function Home() {
         {/* banner */}
         <BannerCarousel />
         {/* top Products */}
-        <section className='container  py-xl-4 py-lg-2 mt-sm-5 py-4'>
+        <section className='container py-xl-4 py-lg-2 mt-sm-5 py-4'>
           <CarBrands brands={brands} />
         </section>
         <div className='ads-grid py-sm-5 py-4'>
