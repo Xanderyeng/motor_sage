@@ -561,7 +561,7 @@ pre code {
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .container {
     max-width: 540px;
   }
@@ -581,9 +581,9 @@ pre code {
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1440px;
   }
-}
+} */
 
 .container-fluid {
   width: 100%;
