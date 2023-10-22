@@ -5,22 +5,22 @@ export default function Brands() {
         <h3 className='text-white font-bold mb-3'>Categories</h3>
         <ul>
           <li className='mb-3'>
-            <a href='product.html'>BMW</a>
+            <a href='/'>BMW</a>
           </li>
           <li className='mb-3'>
-            <a href='product.html'>Mercedes</a>
+            <a href='/'>Mercedes</a>
           </li>
           <li className='mb-3'>
-            <a href='product.html'>Mazda</a>
+            <a href='/'>Mazda</a>
           </li>
           <li className='mb-3'>
-            <a href='product2.html'>Jaguar</a>
+            <a href='/'>Jaguar</a>
           </li>
           <li className='mb-3'>
-            <a href='product.html'>Nissan</a>
+            <a href='/'>Nissan</a>
           </li>
           <li>
-            <a href='product2.html'>Toyota</a>
+            <a href='/'>Toyota</a>
           </li>
         </ul>
       </div>

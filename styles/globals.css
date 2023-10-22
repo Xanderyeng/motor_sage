@@ -27,6 +27,7 @@
   display: block;
   font-size: 14px;
   color: #bdbdbd;
+  line-height: 28px;
 }
 
 .footer-grids ul li a {
@@ -136,4 +137,7 @@ cursor: pointer;
 
 .card-text-style p {
   line-height: 1.9;
+}
+.copyright p {
+  @apply font-inter font-normal text-xs tracking-widest;
 }
