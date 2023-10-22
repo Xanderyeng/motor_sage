@@ -91,6 +91,7 @@ export default function Home() {
         </div>
       </div>
       {/* <BannerCarousel /> */}
+      <BannerSlider />
       <section className="container py-8">
         <CarBrands brands={brands} />
       </section>
