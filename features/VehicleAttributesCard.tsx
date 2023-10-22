@@ -11,54 +11,22 @@ export default function VehicleAttributesCard({ carDetails }: any) {
         transition={{ duration: 0.5 }}
         className=' w-5/12 gap-4 flex flex-row p-8  mx-auto mt-8 bg-white rounded-lg shadow-lg'
       >
-        <div className='w-full '>
-          <div className='flex flex-row flex-wrap justify-between items-center'>
+        <div className='w-full flex flex-col flex-1 py-4 px-8 gap-4'>
+          <div className='flex flex-col gap-4 flex-wrap justify-between items-left'>
             <h2 className='text-3xl font-semibold'>{carDetails.carName}</h2>
             <div className='text-2xl text-blue-600'>
               {formatValue(carDetails.marketplacePrice, "", "KES")}
             </div>
           </div>
-          <div className='mt-4'>
-            <p>
-              Year:{" "}
-              <span className=' font-bold text-lg'>{carDetails.year}</span>
-            </p>
-            <p>
-              Mileage:{" "}
-              <span className=' font-bold text-lg'>
-                {formatValue(carDetails.mileage, "Km")}
-              </span>
-            </p>
-            <p>
-              Model:{" "}
-              <span className=' font-bold text-lg'>
-                {carDetails.model.name}
-              </span>
-            </p>
-            <p>
-              State:{" "}
-              <span className=' font-bold text-lg'>{carDetails.state}</span>
-            </p>
-            <p>
-              Owner Type:{" "}
-              <span className=' font-bold text-lg'>{carDetails.ownerType}</span>
-            </p>
-            <p>
-              Transmission:{" "}
-              <span className=' font-bold text-lg'>
-                {carDetails.transmission}
-              </span>
-            </p>
-            <p>
-              Fuel Type:{" "}
-              <span className=' font-bold text-lg'>{carDetails.fuelType}</span>
-            </p>
-            <p>
-              Selling Condition:{" "}
-              <span className=' font-bold text-lg'>
-                {carDetails.sellingCondition}
-              </span>
-            </p>
+          <div className='mt-4 cardTextStyles card-text-style'>
+          <p><span>Year:</span> <span>{carDetails.year}</span></p>
+          <p><span>Mileage:</span> <span>{formatValue(carDetails.mileage, "Km")}</span></p>
+          <p><span>Model:</span> <span>{carDetails.model.name}</span></p>
+          <p><span>State:</span> <span>{carDetails.state}</span></p>
+          <p><span>Owner Type:</span> <span>{carDetails.ownerType}</span></p>
+          <p><span>Transmission:</span> <span>{carDetails.transmission}</span></p>
+          <p><span>Fuel Type:</span> <span>{carDetails.fuelType}</span></p>
+          <p><span>Selling Condition:</span> <span>{carDetails.sellingCondition}</span></p>
           </div>
         </div>
       </motion.div>

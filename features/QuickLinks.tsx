@@ -1,26 +1,26 @@
 export default function QuickLinks() {
   return (
     <>
-      <div className='col-md-3 col-sm-6 footer-grids mt-sm-0 mt-4'>
-        <h3 className='text-white font-weight-bold mb-3'>Quick Links</h3>
+      <div className='col-md-3 col-sm-6 footer-info footer-grids mt-sm-0 mt-0'>
+        <h3 className='text-white font-bold mb-3'>Quick Links</h3>
         <ul>
           <li className='mb-3'>
-            <a href='about.html'>About Us</a>
+            <a href='#'>About Us</a>
           </li>
           <li className='mb-3'>
-            <a href='contact.html'>Contact Us</a>
+            <a href='#'>Contact Us</a>
           </li>
           <li className='mb-3'>
-            <a href='help.html'>Help</a>
+            <a href='#'>Help</a>
           </li>
           <li className='mb-3'>
-            <a href='faqs.html'>Faqs</a>
+            <a href='#'>Faqs</a>
           </li>
           <li className='mb-3'>
-            <a href='terms.html'>Terms of use</a>
+            <a href='#'>Terms of use</a>
           </li>
           <li>
-            <a href='privacy.html'>Privacy Policy</a>
+            <a href='#'>Privacy Policy</a>
           </li>
         </ul>
       </div>

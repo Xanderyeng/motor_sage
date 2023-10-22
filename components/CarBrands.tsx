@@ -9,9 +9,9 @@ interface CarBrandsProps {
 export default function CarBrands({ brands }: CarBrandsProps) {
   return (
     <>
-      <h3 className='tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3'>
-        <span>P</span>opular
-        <span> B</span>rands
+      <h3 className=' text-4xl font-semibold font-inter drop-shadow-headingTextShadow text-center mb-lg-5 mb-sm-4 pb-4'>
+        <span className="letterStyle">P</span>opular
+        <span className="letterStyle"> B</span>rands
       </h3>
       <div className='flex flex-row flex-wrap gap-6 justify-between'>
         {brands && brands.makeList?.length > 0 ? (

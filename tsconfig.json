@@ -25,7 +25,8 @@
       "@features/*": ["features/*"],
       "@types/*": ["types/*"],
       "@images/*": ["public/images/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@styles/*": ["styles/*"]
     },
     "forceConsistentCasingInFileNames": true
   },

@@ -3,21 +3,19 @@ import logo from '@images/carsymbol5.svg'
 export default function Logo() {
   return (
     <>
-     <div className="col-md-3 p-4">
-      <h1 className="text-right">
-        <a
-          href="index.html"
-          className="text-orange-600 text-3xl font-semibold font-italic relative inline-block hover:no-underline "
-        >
-          <Image
-            src={logo}
-            width={100}
-            height={50}
-            alt="logo"
-            className="absolute left-[-30%] top-[-23px]"
-            style={{ objectFit: "contain" }}
-          />
-          <span className="ml-8">Motor Store</span>
+     <div className="flex items-center justify-start ">
+      {/* <div className="mr-4">
+      </div> */}
+        <Image
+          src={logo}
+          width={100}
+          height={50}
+          alt="logo"
+          style={{ objectFit: "contain" }}
+        />
+      <h1 className="text-orange-600 text-3xl font-bold hover:no-underline" >
+        <a href="index.html" className="flex items-center italic font-bold ">
+          <span>Auto Store</span>
         </a>
       </h1>
     </div>

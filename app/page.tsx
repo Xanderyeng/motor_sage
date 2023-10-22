@@ -1,11 +1,8 @@
 "use client";
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import { fetchCarMakeList } from "@utils/carMakeListFetch";
 import { MakeListType } from "@/types/Types";
-// import { CarAction } from "@/types/Types";
-
 import CarBrands from "@/components/CarBrands";
-// import CarDetail from "@/components/CarListing";
 import Footer from "@/components/Footer";
 import BannerCarousel from "@/features/BannerCarousel";
 import MiddleAdvertBanner from "@/features/MiddleAdvertBanner";
@@ -18,6 +15,7 @@ import CarListing from "@/components/CarListing";
 import { CarType } from "@/types/Types";
 import PopularCars from "@/components/PopularCars";
 import BannerSlider from "@/features/BannerSlider";
+import Header from "@/components/header/Header";
 
 export type CarAction =
   | { type: "carBrand"; payload: MakeListType }
@@ -83,68 +81,37 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log(brands);
-
   return (
     <main>
-      <div>
-        <div className='header-bot'>
-          <div className='container'>
-            <div className='row header-bot_inner_wthreeinfo_header_mid'>
-              {/* logo */}
-              <Logo />
-              {/* header-bot */}
-              <SearchBar />
-            </div>
+     <div className="bg-white overflow-hidden">
+        <div className="w-screen mx-auto">
+          <div className="flex flex-row flex-wrap border-0 border-blue-500  justify-center py-0">
+           <Header brands={brands} />
           </div>
         </div>
-        <NavBar brands={brands} />
-        {/* banner */}
-        <BannerCarousel />
-        {/* <BannerSlider /> */}
-        {/* top Products */}
-        <section className='container py-xl-4 py-lg-2 mt-sm-5 py-4'>
-          <CarBrands brands={brands} />
-        </section>
-        <div className='ads-grid py-sm-5 py-4'>
-          <div className='container md:mx-custom-1366 py-xl-4 py-lg-2'>
-            <div className='row'>
-              {/* product left */}
-              <div className='agileinfo-ads-display col-lg-9'>
-                <div className='wrapper'>
-                  {/* first section */}
-                  <div className=' px-sm-4 px-3 py-sm-0 py-0 mb-4'>
-                    <section className='w-auto gap-4 flex flex-col p-4 mx-auto mt-0 bg-white rounded-lg shadow-lg '>
-                    <PopularCars />    
-                    </section>
-                    <div className='row justify-center'>
-                      {/* ----------- CAR LISTING ---------- */}
-                      <CarListing
-                        // cars={cars}
-                        dispatch={dispatch}
-                        isLoading={isLoading}
-                        // error={error}
-                      />
-                      {/* <CarDetail brands={brands} /> */}
-                      {/* <CarDetail />
-             <CarDetail /> */}
-                    </div>
-                  </div>
-                  {/* second section */}
-                  {/* third section */}
-                  <Offers />
-                  {/* fourth section */}
-                </div>
-              </div>
-
-              <SideBar />
-            </div>
-          </div>
-        </div>
-        {/* middle section */}
-        <MiddleAdvertBanner />
       </div>
-      {/* ---- FOOTER SECTION --- */}
+      {/* <BannerCarousel /> */}
+      <section className="container py-8">
+        <CarBrands brands={brands} />
+      </section>
+      <div className="bg-gray-50">
+        <div className=" md:max-w-6xl lg:max-w-7xl mx-auto py-16">
+          <div className="flex flex-wrap justify-between">
+            <div className="w-full lg:w-9/12 rounded-lg shadow-lg p-4">
+              <div className="mb-4 ">
+                  <PopularCars />
+                  {/* bg-gray-50 rounded-lg shadow-lg p-4 */}
+              </div>
+              <div className="flex flex-col justify-center">
+                <CarListing isLoading={isLoading} dispatch={dispatch} />
+              </div>
+            </div>
+            <SideBar />
+          </div>
+        </div>
+      <MiddleAdvertBanner />
+      </div>
+          <Offers />
       <Footer />
     </main>
   );

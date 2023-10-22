@@ -14,8 +14,8 @@ interface CarListingProps {
 export default function CarListing({ isLoading, dispatch }: CarListingProps) {
   const [cars, setCars] = useState<CarType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6); // Number of items per page
   const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 6; 
 
   useEffect(() => {
     async function fetchData() {
@@ -51,17 +51,22 @@ export default function CarListing({ isLoading, dispatch }: CarListingProps) {
     return <p>Loading cars...</p>;
   }
 
+   // Slice the cars array to Display 6 cars or any Number I define
+   const startIndex = (currentPage - 1) * pageSize;
+   const endIndex = startIndex + pageSize;
+   const carsToDisplay = cars.slice(startIndex, endIndex);
+
   console.log(cars);
   console.log(totalPages);
 
   return (
     <>
       {/* Display the total number of car results */}
-      <div className='text-left mb-4'>
-        <p>{totalPages}: Results</p>
+      <div className='text-center text-xl font-medium py-6 '>
+        <p className="text-btn">{isLoading ? 'Enumerating...' :totalPages } - Cars Available</p>
       </div>
       <div className='car-list relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {cars.map((car) => (
+        {carsToDisplay.map((car) => (
           <Link href={`/car/${car.id}`} key={car.id}>
             <div className='bg-white rounded-lg shadow-lg overflow-hidden group relative'>
               <div className='relative'>

@@ -32,18 +32,18 @@ export default function PopularCars() {
       }, []);
 
   return (
-    <>
-    <Carousel showThumbs={true} showIndicators={true}>
+    <div className="w-full h-auto">
+    <Carousel showThumbs={true} showIndicators={true} className=''>
           {carImages?.map((media) => (
             <div
               key={media.id}
-              className={`rounded-lg overflow-hidden w-full h-[380px] ${carouselItemHeight}`}
+              className={`rounded-lg overflow-hidden w-full h-[400px]`}
             >
               {media.type === "image/jpeg" ? (
                 <img
                   src={media.url}
                   alt={media.name}
-                  className=' object-cover '
+                  className=' object-cover w-full h-full'
                 />
               ) : media.type === "video/mp4" ? (
                 <ReactPlayer
@@ -58,6 +58,6 @@ export default function PopularCars() {
             </div>
           ))}
         </Carousel>
-    </>
+    </div>
   )
 }
