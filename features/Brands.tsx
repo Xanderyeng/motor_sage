@@ -1,8 +1,8 @@
 export default function Brands() {
   return (
     <>
-      <div className='col-md-3 col-sm-6 footer-grids'>
-        <h3 className='text-white font-weight-bold mb-3'>Categories</h3>
+      <div className='col-md-3 col-sm-6 footer-info footer-grids'>
+        <h3 className='text-white font-bold mb-3'>Categories</h3>
         <ul>
           <li className='mb-3'>
             <a href='product.html'>BMW</a>

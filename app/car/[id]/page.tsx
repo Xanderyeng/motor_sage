@@ -8,6 +8,8 @@ import VehicleAttributesCard from "@/features/VehicleAttributesCard";
 import CarMediaCarousel from "@/features/CarMediaCarousel";
 import CarSpecifications from "@/features/CarSpecifications";
 import VehicleAdditionalInfo from "@/features/VehicleAdditionalInfo";
+import Header from "@/components/header/Header";
+import Footer from "@/components/Footer";
 
 export default function CarDetails({ params }: { params: { id: string } }) {
   const [carDetails, setcarDetails] = useState<CarDetailsType | null>(null);
@@ -40,22 +42,31 @@ export default function CarDetails({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className=''>
+    <Header brands={{
+        makeList: [],
+        pagination: {
+          total: 0,
+          currentPage: 0,
+          pageSize: 0
+        }
+      }} />
+      <>
         <div className='min-h-screen w-full flex flex-col items-center justify-center pt-2 bg-gray-100'>
           <AnimatePresence>
             {carDetails && (
               <>
-                <div className=' w-10/12 flex flex-row justify-between border-2 border-orange-600 align-middle '>
+                <div className=' relative w-10/12 flex flex-row justify-between align-middle '>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className='w-6/12 gap-4 flex flex-col p-4 mx-auto mt-8 bg-white rounded-lg shadow-lg border-2 border-green-500'
+                    className=' relative w-6/12 gap-0 flex flex-col flex-shrink p-4 mx-auto mt-0 bg-white rounded-lg shadow-lg '
                   >
                     <>
                     {carImages ? (
                           /* -------- CAROUSEL ------- */
+
                           <CarMediaCarousel carImages={carImages} />
                         ) : (
                           <p>Loading car images...</p>
@@ -64,15 +75,16 @@ export default function CarDetails({ params }: { params: { id: string } }) {
                   </motion.div>
                  <VehicleAttributesCard carDetails={carDetails} />
                 </div>
-                <div className=' flex flex-row w-10/12 px-4 gap-8 justify-center align-middle '>
-                   <CarSpecifications carDetails={carDetails}/>
-                 <VehicleAdditionalInfo carDetails={carDetails} />
-                </div>
+                <div className='container flex flex-row w-10/12 px-0 py-16 gap-8 justify-center align-middle'>
+                        <CarSpecifications carDetails={carDetails} />
+                        <VehicleAdditionalInfo carDetails={carDetails} />
+                    </div>
               </>
             )}
           </AnimatePresence>
         </div>
-      </div>
+      </>
+      <Footer/>
     </>
   );
 }

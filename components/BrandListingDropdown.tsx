@@ -13,10 +13,12 @@ export default function BrandListingDropdown({ brands }: CarBrandsProps) {
 
   return (
     <>
-      <div className='agileits-navi_search'>
-        <form action='#' method='post'>
-          <select id='agileinfo-nav_search' name='agileinfo_search' className='border' required >
-            <option>All Brands</option>
+      <div className='bg-gray-100'>
+        <form action='#' method='post' className='bg-gray-100'>
+          <select id='agileinfo-nav_search' name='agileinfo_search'
+          className=" text-black text-md p-2 w-full leading-5 cursor-pointer outline outline-2 outline-gray-600"
+          required >
+            <option className="text-md font-Inter font-medium">All Brands</option>
             {brandOptions}
           </select>
         </form>
