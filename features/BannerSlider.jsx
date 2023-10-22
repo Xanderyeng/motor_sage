@@ -28,7 +28,7 @@ const sliderImages = [
 
 export default function BannerSlider() {
   return (
-   <div className="swiper mt-4">
+   <div className="swiper">
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={0}
