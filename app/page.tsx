@@ -85,7 +85,7 @@ export default function Home() {
     <main>
      <div className="bg-white overflow-hidden">
         <div className="w-screen mx-auto">
-          <div className="flex flex-row flex-wrap border-0 border-blue-500  justify-center py-0">
+          <div className="flex flex-row flex-wrap border-0 border-blue-500  justify-center pb-2">
            <Header brands={brands} />
           </div>
         </div>
