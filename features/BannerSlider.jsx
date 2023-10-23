@@ -34,6 +34,7 @@ export default function BannerSlider() {
       spaceBetween={0}
       slidesPerView={1}
       lazy={true}
+      loop={true}
       autoplay={{
           delay: 2500,
           disableOnInteraction: false,
