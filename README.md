@@ -1,8 +1,7 @@
-# My Autochek Car Marketplace
-
+# Car Auto Store
 ## Overview
 
-My Autochek Car Marketplace is a web application built with Next.js, React, and TypeScript that allows users to explore popular car makes, browse a list of available cars, view car details, and even watch videos of cars. This project is themed around cars and is based on the Bootstrap template provided.
+Motor Store (sage) is a web application built with Next.js, React, and TypeScript that allows users to explore popular car makes, browse a list of available cars, view car details, and even watch videos of cars. This project is themed around cars and is based on the Bootstrap template provided. Slider JS and Framer Motion libraries have been utilized as well stop tailwind CSS for styling.
 
 ## Features
 
@@ -21,7 +20,7 @@ Follow these steps to run the project locally on your machine:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/my-autochek-car-marketplace.git
+   git clone https://github.com/your-username/motor_sage.git
    cd my-autochek-car-marketplace
 
 2. **Then, run the development server:**
