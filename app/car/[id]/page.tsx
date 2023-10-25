@@ -66,7 +66,6 @@ export default function CarDetails({ params }: { params: { id: string } }) {
                     <>
                     {carImages ? (
                           /* -------- CAROUSEL ------- */
-
                           <CarMediaCarousel carImages={carImages} />
                         ) : (
                           <p>Loading car images...</p>

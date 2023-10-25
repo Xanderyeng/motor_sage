@@ -4,13 +4,9 @@ import { fetchCarMakeList } from "@utils/carMakeListFetch";
 import { MakeListType } from "@/types/Types";
 import CarBrands from "@/components/CarBrands";
 import Footer from "@/components/Footer";
-import BannerCarousel from "@/features/BannerCarousel";
 import MiddleAdvertBanner from "@/features/MiddleAdvertBanner";
 import Offers from "@/features/Offers";
 import SideBar from "@/components/SideBar";
-import NavBar from "@/components/header/NavBar";
-import Logo from "@/components/header/Logo";
-import SearchBar from "@/components/header/SearchBar";
 import CarListing from "@/components/CarListing";
 import { CarType } from "@/types/Types";
 import PopularCars from "@/components/PopularCars";
@@ -53,17 +49,14 @@ export default function Home() {
     carReducer,
     initialState
   );
-  // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetchCarMakeList();
         if (response) {
-          // setCarMakes(response);
           dispatch({ type: "carBrand", payload: response });
         } else {
-          // setError("Failed to fetch car makes");
           dispatch({
             type: "error",
             payload: "Failed to Fetch list of Car Makes",
@@ -71,7 +64,6 @@ export default function Home() {
         }
       } catch (error) {
         console.error("Error fetching car makes:", error);
-        // setError("Failed to fetch car makes");
         dispatch({
           type: "error",
           payload: "Failed to Fetch list of Car Makes",
@@ -90,7 +82,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <BannerCarousel /> */}
       <BannerSlider />
       <section className="container py-8">
         <CarBrands brands={brands} />
@@ -101,7 +92,6 @@ export default function Home() {
             <div className="w-full lg:w-9/12 rounded-lg shadow-lg p-4">
               <div className="mb-4 ">
                   <PopularCars />
-                  {/* bg-gray-50 rounded-lg shadow-lg p-4 */}
               </div>
               <div className="flex flex-col justify-center">
                 <CarListing isLoading={isLoading} dispatch={dispatch} />
